@@ -1,0 +1,26 @@
+20060418 : Memory leak bug fixed by DavidVTailor - See http://seegernet.koolhost.de/zeosforum/viewtopic.php?t=461
+
+20060707 : Added separate drivers for embedded Firebird server - Patch by Terence - see http://zeos.firmos.at/viewtopic.php?t=630
+
+20060707 : Correction of patch above : added support for non-strict dllloading - Written by mdaems
+
+20060710 : Integrated contribution from Terence : separated Firebird from interbase/strict dll loading for Firebird
+
+20060726 : Bytea/blob - PostgreSQL - UNICODE/UTF8 - patch by aperger - see http://zeos.firmos.at/viewtopic.php?t=683
+
+20060802 : Integrated patch from Fduenas concerning http://zeos.firmos.at/viewtopic.php?t=677
+
+20061025 : Blob handling error - Patch by lpolyak - See http://zeos.firmos.at/viewtopic.php?t=855
+
+20061027 : Fix for Bug in TZInterbase6Sequence.GetNextValue - patch by CharlesMcAllister - See http://zeos.firmos.at/viewtopic.php?t=856
+
+20070425 : Allow string values for integer and blob parameters - Patch by Andy - Mantis Bug 13 and 19
+
+20070430 : Allow string values for date parameters - Patch by Andrevanzuydam - Mantis Bug 33
+
+20070614 : Bad wildcard handling in TZInterbase6DatabaseMetadata.ConstructNameCondition - patch by cipto_kh - Mantis Bug 28
+
+20071029 : Problem handling DEFAULT NULL in domain *AND* in table - patch by andrevanzuydam - Mantis Bug 27
+
+20071205 : Metadata (mdTables) is missing remarks data - by Roaster - See http://zeos.firmos.at/viewtopic.php?t=1567
+           Typo in log message after create database - by Roaster - Mantis Bug 79
