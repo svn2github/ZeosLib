@@ -1,0 +1,3 @@
+﻿SQLite3, Version 3.8.7.0
+downloaded on:
+https://www.autoitscript.com/autoit3/files/beta/autoit/archive/sqlite/
