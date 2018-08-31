@@ -1,0 +1,90 @@
+object Form_DBEdit: TForm_DBEdit
+  Left = 456
+  Height = 415
+  Top = 271
+  Width = 394
+  Caption = 'DB Edit'
+  ClientHeight = 415
+  ClientWidth = 394
+  LCLVersion = '1.8.4.0'
+  object DBGrid1: TDBGrid
+    Left = 16
+    Height = 272
+    Top = 64
+    Width = 368
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource1
+    TabOrder = 0
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 16
+    Height = 25
+    Top = 344
+    Width = 241
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 241
+    DataSource = DataSource1
+    Options = []
+    TabOrder = 1
+  end
+  object FBHelper1: TFBHelper
+    ServerName = 'localhost'
+    Database = 'C:\Users\IKS-Technik\Documents\Christian\firebirdDB\TEST.FDB'
+    UserName = 'SYSDBA'
+    Password = 'masterkey'
+    IniFile = 'C:\Users\IKS-Technik\Documents\Christian\firebirdDB\TEST.ini'
+    Protocol = 'firebird'
+    UseLoacalAccess = True
+    Port = 3050
+    left = 8
+    top = 8
+  end
+  object ZConnection1: TZConnection
+    ControlsCodePage = cCP_UTF8
+    ClientCodepage = 'UTF8'
+    Properties.Strings = (
+      'codepage=UTF8'
+    )
+    DesignConnection = True
+    HostName = 'localhost'
+    Port = 3050
+    Database = 'C:\Users\IKS-Technik\Documents\Christian\firebirdDB\TEST.FDB'
+    User = 'SYSDBA'
+    Password = 'masterkey'
+    Protocol = 'firebird'
+    LibraryLocation = 'C:\Program Files (x86)\Firebird\Firebird_3_0\fbclient.dll'
+    left = 48
+    top = 8
+  end
+  object ZQuery1: TZQuery
+    Connection = ZConnection1
+    SQL.Strings = (
+      'SELECT * FROM SUITES'
+    )
+    Params = <>
+    Sequence = ZSequence1
+    SequenceField = 'SUITE_ID'
+    left = 88
+    top = 8
+  end
+  object DataSource1: TDataSource
+    DataSet = ZQuery1
+    left = 128
+    top = 8
+  end
+  object ZSequence1: TZSequence
+    Connection = ZConnection1
+    SequenceName = 'GENERIC'
+    left = 176
+    top = 8
+  end
+end

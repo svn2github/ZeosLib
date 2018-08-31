@@ -1,0 +1,66 @@
+object Form_EditConfigurations: TForm_EditConfigurations
+  Left = 570
+  Height = 244
+  Top = 662
+  Width = 320
+  Caption = 'Manage Compilers'
+  ClientHeight = 244
+  ClientWidth = 320
+  OnCreate = FormCreate
+  LCLVersion = '1.8.4.0'
+  object DBNavigator1: TDBNavigator
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 32
+    Height = 25
+    Top = 207
+    Width = 241
+    Anchors = [akBottom]
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 241
+    DataSource = DataSource_EditConfigurations
+    Options = []
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 16
+    Height = 192
+    Top = 8
+    Width = 288
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoEdit = False
+    AutoFillColumns = True
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource_EditConfigurations
+    Scrollbars = ssAutoVertical
+    TabOrder = 1
+    OnCellClick = DBGrid1CellClick
+  end
+  object ZQuery_EditConfigurations: TZQuery
+    Connection = Form_Configurations.ZConnectionMain
+    AfterOpen = ZQuery_EditConfigurationsAfterOpen
+    SQL.Strings = (
+      'SELECT * FROM COMPILERS'
+    )
+    Params = <>
+    Sequence = Form_Configurations.ZSequenceGeneric
+    SequenceField = 'COMPILER_ID'
+    left = 40
+    top = 112
+  end
+  object DataSource_EditConfigurations: TDataSource
+    DataSet = ZQuery_EditConfigurations
+    left = 72
+    top = 112
+  end
+end

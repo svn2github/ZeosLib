@@ -1,0 +1,99 @@
+================================
+=========== Summary ============
+1. Setup
+2. Structure
+3. CTCM.exe | Compiler Test Configuration Manager
+4. CTSG.exe | Compiler Test Script Generator
+================================
+
+========== 1. Setup ============
+
+Both applications use a firebird database to store their data.
+
+
+>> 1.1 Creating a firebird database in isql (example)
+
+Open isql.exe and execute (example):
+
+	CREATE DATABASE 'C:\<path>\<filename>.fdb' page_size 8192 user 'SYSDBA' password 'masterkey';
+
+	
+>> 1.2 Creating the required tables using the creation_script.sql found inside this folder
+
+After connecting to the database in isql use:
+
+	INPUT <path to creation_script.sql>
+	
+	
+>> 1.3 connection.ini
+
+After executing one of the programs for the first time, a connection.ini file will be created automatically.
+Fill in the required information like database-path and username + password and you are ready to go.
+
+
+========= 2. Structure =========
+
+The database consists of 3 tables which share a single generator 'GENERIC' for creating unique IDs used as primary keys.
+
+The table 'SUITES' contains the different database suites which are to be tested.
+Every row contains a suite and all the information needed to later provide a test.<suite>.properties file.
+There is also a 'SHORTNAME' that does not have any character limitations (in contrast to the 'SUITENAME')
+which is only used by the GUI Application. Both have to be unique across their column but may be equal inside their row.
+
+The table 'COMPILERS' is just a list of compilers the user wants to test. (Names and IDs)
+
+The table 'PAIRING' is used to match compilers and suites that should be tested together.
+It's fields are 'ID' only used as primary key and 'COMPILER_ID' + 'SUITE_ID'.
+On execution of the extractor.exe all rows matching the COMPILER_ID belonging to the compiler
+specified in it's start parameters will be selected. After that, a .properties file is created for every entry found.
+
+
+========= 3. CTCM.exe ==========
+Compiler Test Configuration Manager
+
+This is the GUI application for defining compilers, suites and their relations (used or not used with each other).
+The first window opened is labeled 'Configurations'.
+It consists of
+- Database-Aware list of compilers where you can add, remove and select entries using the navigation bar.
+- Checklist with a checkbox for every existing suite.
+- 'Reset Changes' button which just reloads the 'checked' status of the checkboxes from the database.
+- 'Save Changes' button which deletes all entries in 'PAIRING' that have the same COMPILER_ID as the compiler selected in the drop-down-bar.
+  and creates new ones for every checked suite. << Note that this is the most Generator-ID consuming process of the whole system.
+
+The 'Suites' window consists of
+- Database-Aware list of suites where you can add, remove and select entries using the navigation bar.
+- Various database-aware input options for the different parameters later used in the test.<suite>.properties files.
+  
+
+======== 4. CTSG.exe ===========
+Compiler Test Script Generator
+
+This is the console application that should be executed by a continuous integration tool like Hudson.
+It requires 3 start parameters and will not run if any one is left out.
+
+>> 4.1 Parameters
+
+	-b <fileName> 			| This is the file name of the batch file created at the end.
+	--batch=<fileName>
+	
+	-c <compilerName>		| This is the name of the compiler to be used for the tests.
+	--compiler=<compName>	| It must match an entry in the 'COMPILERS'.'NAME' column of the database.
+	
+	-e <path>				| This is the file path including file name to the testing (zTestall) .exe on your system.
+	--exe=<path>
+	
+	
+>> 4.2 Procedure
+
+	- check if all parameters were defined
+	- check if exe file from -e exists
+	- load connection.ini file, create default file if not found
+	- connect to database
+	- load a list of all compilers from the database
+	- locate the one that matches the -c parameter
+	- load the corresponding suites
+	- delete any existing .bar and .properties file inside the working directory
+	- write the batch file and properties files
+
+	If any error occurs regarding invalid file paths or invalid database structure, the application will terminate with exit code '1337'
+	and write a short problem description to the console (which should be logged by the CI tool.

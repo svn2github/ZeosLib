@@ -1,0 +1,390 @@
+object Form_Suites: TForm_Suites
+  Left = 425
+  Height = 384
+  Top = 147
+  Width = 1289
+  HorzScrollBar.Page = 256
+  HorzScrollBar.Range = 256
+  VertScrollBar.Page = 785
+  VertScrollBar.Range = 785
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Suites'
+  ClientHeight = 384
+  ClientWidth = 1289
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.8.4.0'
+  object L_Protocol: TLabel
+    Left = 272
+    Height = 15
+    Top = 73
+    Width = 48
+    Caption = 'Protocol:'
+    ParentColor = False
+  end
+  object L_Host: TLabel
+    Left = 272
+    Height = 15
+    Top = 105
+    Width = 28
+    Caption = 'Host:'
+    ParentColor = False
+  end
+  object L_Database: TLabel
+    Left = 272
+    Height = 15
+    Top = 137
+    Width = 51
+    Caption = 'Database:'
+    ParentColor = False
+  end
+  object L_Port: TLabel
+    Left = 272
+    Height = 15
+    Top = 169
+    Width = 25
+    Caption = 'Port:'
+    ParentColor = False
+  end
+  object L_Username: TLabel
+    Left = 272
+    Height = 15
+    Top = 201
+    Width = 56
+    Caption = 'Username:'
+    ParentColor = False
+  end
+  object L_Password: TLabel
+    Left = 272
+    Height = 15
+    Top = 233
+    Width = 53
+    Caption = 'Password:'
+    ParentColor = False
+  end
+  object L_Rebuild: TLabel
+    Left = 272
+    Height = 15
+    Top = 261
+    Width = 63
+    Caption = 'Do-Rebuild:'
+    ParentColor = False
+  end
+  object L_Suitename: TLabel
+    Left = 272
+    Height = 15
+    Top = 41
+    Width = 59
+    Caption = 'Suitename:'
+    ParentColor = False
+  end
+  object L_Create: TLabel
+    Left = 624
+    Height = 15
+    Top = 152
+    Width = 75
+    Caption = 'Create Scripts:'
+    ParentColor = False
+  end
+  object L_Drop: TLabel
+    Left = 624
+    Height = 15
+    Top = 264
+    Width = 67
+    Caption = 'Drop Scripts:'
+    ParentColor = False
+  end
+  object L_Properties: TLabel
+    Left = 624
+    Height = 15
+    Top = 32
+    Width = 56
+    Caption = 'Properties:'
+    ParentColor = False
+  end
+  object L_DelimiterType: TLabel
+    Left = 272
+    Height = 15
+    Top = 289
+    Width = 80
+    Caption = 'Delimiter Type:'
+    ParentColor = False
+  end
+  object L_Delimiter: TLabel
+    Left = 272
+    Height = 15
+    Top = 321
+    Width = 51
+    Caption = 'Delimiter:'
+    ParentColor = False
+  end
+  object DBEdit_Username: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'User name'#13#10#13#10'e.g. ''SYSDBA'' or ''admin'''
+    Top = 201
+    Width = 216
+    DataField = 'USERNAME'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 255
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+  end
+  object DBEdit_Password: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'User password'#13#10#13#10'e.g. ''masterkey'' or ''markusi$tcool123'''
+    Top = 233
+    Width = 216
+    DataField = 'PASSWORD'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 255
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 8
+  end
+  object DBEdit_Port: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'Port number'#13#10#13#10'e.g. ''3050'''
+    Top = 169
+    Width = 216
+    DataField = 'PORT'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 5
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 6
+  end
+  object DBEdit_Database: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'Database name'#13#10#13#10'e.g. ''D:\Projects\Databases\myDatabase.fdb'''
+    Top = 137
+    Width = 216
+    DataField = 'DATABASE'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 255
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+  end
+  object DBEdit_Host: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'Host name'#13#10#13#10'e.g. ''localhost'''
+    Top = 105
+    Width = 216
+    DataField = 'HOST'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 50
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+  end
+  object DBEdit_Protocol: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'DBC protocol name'#13#10#13#10'e.g. ''firebird'''
+    Top = 73
+    Width = 216
+    DataField = 'PROTOCOL'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 20
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object DBEdit_Suitename: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'Unique name of the suite'#13#10'MUST NOT contain any of the following characters:'#13#10'[Space] . , : ; ? \ / * < > | " '''#13#10#13#10'e.g. ''firebird25'''
+    Top = 41
+    Width = 216
+    DataField = 'SUITENAME'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 50
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object DBEdit_Delimeter: TDBEdit
+    Left = 360
+    Height = 23
+    Hint = 'SQL delimeter string'#13#10#13#10'e.g. '';'''
+    Top = 321
+    Width = 26
+    DataField = 'DELIMITER'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 1
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 11
+  end
+  object DBComboBox_Delimeter_Type: TDBComboBox
+    Left = 360
+    Height = 23
+    Hint = 'SQL delimeter type in SQL scripts'
+    Top = 289
+    Width = 128
+    DataField = 'DELIMITER_TYPE'
+    DataSource = DataSource_SuitesModify
+    DropDownCount = 5
+    ItemHeight = 15
+    Items.Strings = (
+      'Default'
+      'Delimiter'
+      'Go'
+      'SetTerm'
+      'EmptyLine'
+    )
+    MaxLength = 0
+    ParentShowHint = False
+    ShowHint = True
+    Style = csDropDownList
+    TabOrder = 10
+  end
+  object DBCheckBox_Do_Rebuild: TDBCheckBox
+    Left = 360
+    Height = 23
+    Hint = 'Flag to rebuild database before each test'
+    Top = 257
+    Width = 18
+    DataField = 'DO_REBUILD'
+    DataSource = DataSource_SuitesModify
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 9
+    ValueChecked = 'yes'
+    ValueUnchecked = 'no'
+  end
+  object DBMemo_Properties: TDBMemo
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 712
+    Height = 112
+    Hint = 'Properties'#13#10'use one line for each'#13#10#13#10'e.g. ''codepage=UTF-8'''
+    Top = 8
+    Width = 570
+    DataField = 'PROPERTIES'
+    DataSource = DataSource_SuitesModify
+    ParentShowHint = False
+    ScrollBars = ssAutoBoth
+    ShowHint = True
+    TabOrder = 12
+    WordWrap = False
+  end
+  object DBMemo_Create: TDBMemo
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 712
+    Height = 112
+    Hint = 'SQL scripts to create database objects'#13#10'use one line for each'#13#10#13#10'e.g. ''create_interbase.sql'''
+    Top = 128
+    Width = 570
+    DataField = 'CREATE_SCRIPTS'
+    DataSource = DataSource_SuitesModify
+    ParentShowHint = False
+    ScrollBars = ssAutoBoth
+    ShowHint = True
+    TabOrder = 13
+    WordWrap = False
+  end
+  object DBMemo_Drop: TDBMemo
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 712
+    Height = 112
+    Hint = 'SQL scripts to drop database objects'#13#10'use one line for each'#13#10#13#10'e.g. ''drop_interbase.sql'''
+    Top = 248
+    Width = 570
+    Anchors = [akTop, akLeft, akRight]
+    DataField = 'DROP_SCRIPTS'
+    DataSource = DataSource_SuitesModify
+    ScrollBars = ssAutoBoth
+    TabOrder = 14
+    WordWrap = False
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 8
+    Height = 25
+    Top = 352
+    Width = 696
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 696
+    DataSource = DataSource_SuitesModify
+    Options = []
+    TabOrder = 1
+  end
+  object DBGrid1: TDBGrid
+    AnchorSideBottom.Control = DBNavigator1
+    Left = 8
+    Height = 344
+    Top = 8
+    Width = 248
+    Anchors = [akTop, akLeft, akBottom]
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource_SuitesModify
+    Scrollbars = ssAutoVertical
+    TabOrder = 0
+  end
+  object L_Shortname: TLabel
+    Left = 272
+    Height = 15
+    Top = 8
+    Width = 61
+    Caption = 'Shortname:'
+    ParentColor = False
+  end
+  object DBEdit_Shortname: TDBEdit
+    Left = 360
+    Height = 23
+    Top = 8
+    Width = 216
+    DataField = 'SHORTNAME'
+    DataSource = DataSource_SuitesModify
+    CharCase = ecNormal
+    MaxLength = 0
+    TabOrder = 15
+  end
+  object ZQuery_SuitesModify: TZQuery
+    Connection = Form_Configurations.ZConnectionMain
+    SortedFields = 'SHORTNAME'
+    AfterOpen = ZQuery_SuitesModifyAfterOpen
+    BeforePost = ZQuery_SuitesModifyBeforePost
+    SQL.Strings = (
+      'SELECT * FROM SUITES'
+    )
+    Params = <>
+    IndexFieldNames = 'SHORTNAME Asc'
+    Sequence = Form_Configurations.ZSequenceGeneric
+    SequenceField = 'SUITE_ID'
+    left = 96
+    top = 72
+  end
+  object DataSource_SuitesModify: TDataSource
+    DataSet = ZQuery_SuitesModify
+    left = 96
+    top = 136
+  end
+end

@@ -1,0 +1,189 @@
+object Form_Configurations: TForm_Configurations
+  Left = 425
+  Height = 363
+  Top = 117
+  Width = 767
+  BorderStyle = bsSingle
+  Caption = 'Configurations'
+  ClientHeight = 363
+  ClientWidth = 767
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.8.4.0'
+  Scaled = False
+  object B_Reset: TButton
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 271
+    Height = 29
+    Top = 323
+    Width = 120
+    Anchors = [akLeft, akBottom]
+    Caption = 'Reset Changes'
+    OnClick = B_ResetClick
+    TabOrder = 3
+  end
+  object B_Save: TButton
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 434
+    Height = 29
+    Top = 323
+    Width = 118
+    Anchors = [akLeft, akBottom]
+    Caption = 'Save Changes'
+    OnClick = B_SaveClick
+    TabOrder = 4
+  end
+  object Checklistbox_SuitesToUse: TCheckListBox
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = B_Save
+    Left = 272
+    Height = 315
+    Top = 8
+    Width = 279
+    ItemHeight = 0
+    Sorted = True
+    TabOrder = 2
+  end
+  object DBGrid1: TDBGrid
+    AnchorSideBottom.Control = DBNavigator1
+    Left = 8
+    Height = 315
+    Top = 8
+    Width = 248
+    Anchors = [akTop, akLeft, akBottom]
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource_EditConfigurations
+    Scrollbars = ssAutoVertical
+    TabOrder = 0
+  end
+  object DBNavigator1: TDBNavigator
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 7
+    Height = 25
+    Top = 323
+    Width = 241
+    Anchors = [akLeft, akBottom]
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 241
+    DataSource = DataSource_EditConfigurations
+    Options = []
+    TabOrder = 1
+  end
+  object OpenSuites: TButton
+    Left = 576
+    Height = 49
+    Top = 152
+    Width = 176
+    Caption = 'Open Suites Panel'
+    OnClick = OpenSuitesClick
+    TabOrder = 5
+  end
+  object ZConnectionMain: TZConnection
+    ControlsCodePage = cCP_UTF8
+    ClientCodepage = 'UTF8'
+    Properties.Strings = (
+      'codepage=UTF8'
+    )
+    DesignConnection = True
+    Port = 3050
+    User = 'SYSDBA'
+    left = 424
+    top = 72
+  end
+  object ZQuery_Suites: TZQuery
+    Connection = ZConnectionMain
+    SQL.Strings = (
+      'SELECT SHORTNAME, SUITE_ID FROM SUITES'
+    )
+    Params = <>
+    left = 304
+    top = 16
+  end
+  object ZQuery_Pairing: TZQuery
+    Connection = ZConnectionMain
+    Params = <>
+    Sequence = ZSequenceGeneric
+    left = 384
+    top = 16
+  end
+  object ZSequenceGeneric: TZSequence
+    Connection = ZConnectionMain
+    SequenceName = 'GENERIC'
+    left = 320
+    top = 72
+  end
+  object ZQuery_Insert: TZQuery
+    Connection = ZConnectionMain
+    SQL.Strings = (
+      'INSERT INTO PAIRING (ID, COMPILER_ID, SUITE_ID) VALUES (:ID, :CID, :SU_ID)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'ID'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'CID'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'SU_ID'
+        ParamType = ptUnknown
+      end>
+    left = 464
+    top = 16
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'ID'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'CID'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'SU_ID'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZQuery_EditConfigurations: TZQuery
+    Connection = ZConnectionMain
+    SortedFields = 'NAME'
+    AfterOpen = ZQuery_EditConfigurationsAfterOpen
+    AfterScroll = ZQuery_EditConfigurationsAfterScroll
+    BeforeDelete = ZQuery_EditConfigurationsBeforeDelete
+    SQL.Strings = (
+      'SELECT * FROM COMPILERS'
+    )
+    Params = <>
+    IndexFieldNames = 'NAME Asc'
+    Sequence = ZSequenceGeneric
+    SequenceField = 'COMPILER_ID'
+    left = 112
+    top = 72
+  end
+  object DataSource_EditConfigurations: TDataSource
+    DataSet = ZQuery_EditConfigurations
+    left = 112
+    top = 136
+  end
+end
